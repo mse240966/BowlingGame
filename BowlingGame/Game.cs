@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BowlingGame
 {
@@ -20,21 +18,21 @@ namespace BowlingGame
 
         public void Roll(int pins)
         {
-            if (_frames[_currentFrame].FrameComplete())
+            if (CurrentFrame().IsComplete())
             {
                 StartNewFrame();
             }
 
-            _frames[_currentFrame].Roll(pins);
+            CurrentFrame().Roll(pins);
 
-            if (_currentFrame > 0 && _frames[_currentFrame-1].IsSpare())
+            if (HasMoreThanOneFrame() && PreviousFrame().IsSpare())
             {
-                _frames[_currentFrame-1].Roll(pins);
+                PreviousFrame().SpareRoll(pins);
             }
 
-            if (_currentFrame > 0 && _frames[_currentFrame-1].IsStrike())
+            if (HasMoreThanOneFrame() && PreviousFrame().IsStrike())
             {
-                _frames[_currentFrame-1].Roll(pins);
+                PreviousFrame().StrikeRoll(pins);
             }
         }
 
@@ -54,6 +52,21 @@ namespace BowlingGame
         {
             _frames.Add(new Frame());
             _currentFrame++;
+        }
+
+        private Frame CurrentFrame()
+        {
+            return _frames[_currentFrame];
+        }
+
+        private Frame PreviousFrame()
+        {
+            return _frames[_currentFrame-1];
+        }
+
+        private bool HasMoreThanOneFrame()
+        {
+            return _currentFrame > 0;
         }
     }
 }

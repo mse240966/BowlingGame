@@ -39,7 +39,20 @@ namespace BowlingGame.Test
             _frame.Roll(4);
 
             // Assert
-            Assert.True(_frame.FrameComplete());
+            Assert.True(_frame.IsComplete());
+        }
+
+        [Test]
+        public void Test_Frame_Complete_Is_True_With_A_Strike()
+        {
+            // Arrange
+            CreateNewFrame();
+
+            // Act
+            _frame.Roll(10);
+
+            // Assert
+            Assert.True(_frame.IsComplete());
         }
 
         [Test]
@@ -52,7 +65,7 @@ namespace BowlingGame.Test
             _frame.Roll(5);
 
             // Assert
-            Assert.False(_frame.FrameComplete());
+            Assert.False(_frame.IsComplete());
         }
 
         private void CreateNewFrame()

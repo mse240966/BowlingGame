@@ -77,8 +77,8 @@ namespace BowlingGame.Test
 
         private void RollASpare()
         {
-            _game.Roll(5);
-            _game.Roll(5);
+            _game.Roll(6);
+            _game.Roll(4);
         }
 
         private void RollAStrike()
