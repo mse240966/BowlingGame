@@ -13,36 +13,23 @@ namespace BowlingGame.Test
             Assert.DoesNotThrow(new TestDelegate(CreateNewFrame));
         }
 
-        [Test]
-        public void Test_IsSpare_Is_True()
+        [TestCase(7, 3, true)]
+        [TestCase(7, 2, false)]
+        public void Test_IsSpare_Returns_Correct_Value(int firstRoll, int secondRoll, bool expectedResult)
         {
             // Arrange
             CreateNewFrame();
 
             // Act
-            _frame.Roll(5);
-            _frame.Roll(5);
+            _frame.Roll(firstRoll);
+            _frame.Roll(secondRoll);
 
             // Assert
-            Assert.True(_frame.IsSpare());
+            Assert.AreEqual(expectedResult, _frame.IsSpare());
         }
 
         [Test]
-        public void Test_IsSpare_Is_False()
-        {
-            // Arrange
-            CreateNewFrame();
-
-            // Act
-            _frame.Roll(5);
-            _frame.Roll(4);
-
-            // Assert
-            Assert.False(_frame.IsSpare());
-        }
-
-        [Test]
-        public void Test_Next_Frame_Is_True()
+        public void Test_Frame_Complete_Is_True()
         {
             // Arrange
             CreateNewFrame();
@@ -56,7 +43,7 @@ namespace BowlingGame.Test
         }
 
         [Test]
-        public void Test_Next_Frame_Is_False()
+        public void Test_Frame_Complete_Is_False()
         {
             // Arrange
             CreateNewFrame();
@@ -67,10 +54,10 @@ namespace BowlingGame.Test
             // Assert
             Assert.False(_frame.FrameComplete());
         }
+
         private void CreateNewFrame()
         {
             _frame = new Frame();
         }
-
     }
 }

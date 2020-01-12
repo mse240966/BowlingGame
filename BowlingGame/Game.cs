@@ -20,15 +20,19 @@ namespace BowlingGame
 
         public void Roll(int pins)
         {
-            _frames[_currentFrame].Roll(pins);
-
             if (_frames[_currentFrame].FrameComplete())
             {
                 StartNewFrame();
-                return;
             }
 
+            _frames[_currentFrame].Roll(pins);
+
             if (_currentFrame > 0 && _frames[_currentFrame-1].IsSpare())
+            {
+                _frames[_currentFrame-1].Roll(pins);
+            }
+
+            if (_currentFrame > 0 && _frames[_currentFrame-1].IsStrike())
             {
                 _frames[_currentFrame-1].Roll(pins);
             }

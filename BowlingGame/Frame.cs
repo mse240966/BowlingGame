@@ -35,6 +35,11 @@ namespace BowlingGame
             return _rolls.Count == 2 && Score() == 10;
         }
 
+        public bool IsStrike()
+        {
+            return _rolls.Count == 1 && Score() == 10;
+        }
+
         public bool FrameComplete()
         {
             return _rolls.Count == 2;

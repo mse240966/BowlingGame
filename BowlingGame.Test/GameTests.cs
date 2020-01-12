@@ -35,12 +35,31 @@ namespace BowlingGame.Test
 
             // Act
             RollASpare();
+
             _game.Roll(3);
 
             RollMany(17, 0);
 
             // Assert
             Assert.AreEqual(16, _game.Score());
+        }
+
+        [Test]
+        public void Test_Rolling_A_Stike()
+        {
+            // Arrange
+            CreateNewGame();
+
+            // Act
+            RollAStrike();
+
+            _game.Roll(3);
+            _game.Roll(4);
+
+            RollMany(16, 0);
+
+            // Assert
+            Assert.AreEqual(24, _game.Score());
         }
 
         private void CreateNewGame()
@@ -60,6 +79,11 @@ namespace BowlingGame.Test
         {
             _game.Roll(5);
             _game.Roll(5);
+        }
+
+        private void RollAStrike()
+        {
+            _game.Roll(10);
         }
     }
 }
