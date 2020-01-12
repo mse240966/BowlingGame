@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BowlingGame.Test
 {
@@ -16,14 +13,12 @@ namespace BowlingGame.Test
             Assert.DoesNotThrow(new TestDelegate(CreateNewFrame));
         }
 
-        private void CreateNewFrame()
-        {
-            _frame = new Frame();
-        }
-
         [Test]
         public void Test_IsSpare_Is_True()
         {
+            // Arrange
+            CreateNewFrame();
+
             // Act
             _frame.Roll(5);
             _frame.Roll(5);
@@ -35,12 +30,47 @@ namespace BowlingGame.Test
         [Test]
         public void Test_IsSpare_Is_False()
         {
+            // Arrange
+            CreateNewFrame();
+
             // Act
             _frame.Roll(5);
             _frame.Roll(4);
 
             // Assert
-            Assert.True(_frame.IsSpare());
+            Assert.False(_frame.IsSpare());
         }
+
+        [Test]
+        public void Test_Next_Frame_Is_True()
+        {
+            // Arrange
+            CreateNewFrame();
+
+            // Act
+            _frame.Roll(5);
+            _frame.Roll(4);
+
+            // Assert
+            Assert.True(_frame.FrameComplete());
+        }
+
+        [Test]
+        public void Test_Next_Frame_Is_False()
+        {
+            // Arrange
+            CreateNewFrame();
+
+            // Act
+            _frame.Roll(5);
+
+            // Assert
+            Assert.False(_frame.FrameComplete());
+        }
+        private void CreateNewFrame()
+        {
+            _frame = new Frame();
+        }
+
     }
 }

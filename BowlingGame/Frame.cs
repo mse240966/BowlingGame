@@ -21,6 +21,7 @@ namespace BowlingGame
         public int Score()
         {
             var score = 0;
+
             for (int roll = 0; roll < _rolls.Count; roll++)
             {
                 score += _rolls[roll];
@@ -32,6 +33,11 @@ namespace BowlingGame
         public bool IsSpare()
         {
             return _rolls.Count == 2 && Score() == 10;
+        }
+
+        public bool FrameComplete()
+        {
+            return _rolls.Count == 2;
         }
     }
 }

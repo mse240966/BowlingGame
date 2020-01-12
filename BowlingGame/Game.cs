@@ -21,17 +21,35 @@ namespace BowlingGame
         public void Roll(int pins)
         {
             _frames[_currentFrame].Roll(pins);
+
+            if (_frames[_currentFrame].FrameComplete())
+            {
+                StartNewFrame();
+                return;
+            }
+
+            if (_currentFrame > 0 && _frames[_currentFrame-1].IsSpare())
+            {
+                _frames[_currentFrame-1].Roll(pins);
+            }
         }
 
         public int Score()
         {
             var score = 0;
+
             for(int frame=0; frame < _frames.Count; frame++)
             {
                 score += _frames[frame].Score();
             }
 
             return score;
+        }
+
+        private void StartNewFrame()
+        {
+            _frames.Add(new Frame());
+            _currentFrame++;
         }
     }
 }

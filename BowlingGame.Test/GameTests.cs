@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BowlingGame.Test
 {
@@ -30,22 +27,21 @@ namespace BowlingGame.Test
             Assert.AreEqual(expectedScore, _game.Score());
         }
 
-        //[Test]
-        //public void Test_Rolling_A_Spare()
-        //{
-        //    // Arrange
-        //    CreateNewGame();
+        [Test]
+        public void Test_Rolling_A_Spare()
+        {
+            // Arrange
+            CreateNewGame();
 
-        //    // Act
-        //    _game.Roll(5);
-        //    _game.Roll(5);  // <-- This causes a spare
-        //    _game.Roll(3);
+            // Act
+            RollASpare();
+            _game.Roll(3);
 
-        //    RollMany(17, 0);
+            RollMany(17, 0);
 
-        //    // Assert
-        //    Assert.AreEqual(16, _game.Score());
-        //}
+            // Assert
+            Assert.AreEqual(16, _game.Score());
+        }
 
         private void CreateNewGame()
         {
@@ -58,6 +54,12 @@ namespace BowlingGame.Test
             {
                 _game.Roll(numberOfPins);
             }
+        }
+
+        private void RollASpare()
+        {
+            _game.Roll(5);
+            _game.Roll(5);
         }
     }
 }
