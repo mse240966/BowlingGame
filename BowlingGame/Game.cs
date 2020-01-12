@@ -22,12 +22,17 @@ namespace BowlingGame
 
             CurrentFrame().Roll(pins);
 
-            if (HasMoreThanOneFrame() && PreviousFrame().IsSpare())
+            if (OnlyOneFrame())
+            {
+                return;
+            }
+
+            if (PreviousFrame().IsSpare())
             {
                 PreviousFrame().SpareRoll(pins);
             }
 
-            if (HasMoreThanOneFrame() && PreviousFrame().IsStrike())
+            if (PreviousFrame().IsStrike())
             {
                 PreviousFrame().StrikeRoll(pins);
             }
@@ -58,9 +63,9 @@ namespace BowlingGame
             return _frames[_currentFrame-1];
         }
 
-        private bool HasMoreThanOneFrame()
+        private bool OnlyOneFrame()
         {
-            return _currentFrame > 0;
+            return _currentFrame == 0;
         }
     }
 }
