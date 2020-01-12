@@ -9,10 +9,7 @@ namespace BowlingGame
 
         public Game()
         {
-            _frames = new List<Frame>
-            {
-                new Frame()
-            };
+            _frames = new List<Frame> { new Frame() };
             _currentFrame = 0;
         }
 
@@ -40,10 +37,7 @@ namespace BowlingGame
         {
             var score = 0;
 
-            for(int frame=0; frame < _frames.Count; frame++)
-            {
-                score += _frames[frame].Score();
-            }
+            _frames.ForEach(x => score += x.Score());
 
             return score;
         }

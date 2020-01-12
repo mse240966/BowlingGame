@@ -62,6 +62,19 @@ namespace BowlingGame.Test
             Assert.AreEqual(24, _game.Score());
         }
 
+        [Test]
+        public void Test_The_Perfect_Game()
+        {
+            // Arrange
+            CreateNewGame();
+
+            // Act
+            RollMany(12, 10);
+
+            // Assert
+            Assert.AreEqual(300, _game.Score());
+        }
+
         private void CreateNewGame()
         {
             _game = new Game();

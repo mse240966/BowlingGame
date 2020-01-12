@@ -24,10 +24,7 @@ namespace BowlingGame
         {
             var score = 0;
 
-            for (int roll = 0; roll < _rolls.Count; roll++)
-            {
-                score += _rolls[roll];
-            }
+            _rolls.ForEach(x => score += x);
 
             return score + _spareBonus + _strikeBonus;
         }
